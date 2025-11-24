@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio | Allada Sai Satya Sharan</title>
+    <!-- GOOGLE FONTS -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Fira+Mono:wght@400;700&display=swap" rel="stylesheet">    
+    <style>
+        :root {
+            --main-bg: linear-gradient(120deg, #e0eafc 0%, #cfdef3 100%);
+            --glass-bg: rgba(255,255,255,0.25);
+            --glass-blur: blur(13px);
+            --accent: #605DFF;
+            --accent2: #11C0E2;
+            --accent3: #633BCE;
+            --font-main: 'Montserrat', sans-serif;
+            --font-mono: 'Fira Mono', monospace;
+            --header-height: 75px;
+            --border-radius: 20px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0; padding: 0;
+        }
+        body {
+            min-height: 100vh;
+            font-family: var(--font-main);
+            background: var(--main-bg);
+            color: #21243c;
+            box-sizing: border-box;
+        }
+
+        /* ---------- HEADER ---------- */
+        .header {
+            position: fixed;
+            top: 0; left: 0; width: 100%;
+            background: var(--glass-bg);
+            backdrop-filter: var(--glass-blur);
+            height: var(--header-height);
+            box-shadow: 0 8px 32px 0 rgba(60,60,60,0.06);
+            z-index: 100;
+            display: flex; align-items: center;
+            transition: background 0.3s;
+        }
+        .navbar {
+            width: 100%; max-width: 1200px;
+            margin: 0 auto;
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 0 40px;
+        }
+        .logo h2 {
+            font-family: var(--font-mono);
+            font-size: 2.2rem;
+            color: var(--accent);
+            letter-spacing: 1.5px;
+        }
+        .nav-links {
+            list-style: none;
+            display: flex;
+        }
+        .nav-links li {
+            margin-left: 32px;
+        }
+        .nav-links a {
+            font-family: var(--font-mono);
+            color: #3a406a;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.05rem;
+            padding: 8px 0;
+            border-bottom: 2px solid transparent;
+            transition: color 0.2s, border-color 0.2s;
+        }
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--accent);
+            border-color: var(--accent);
+        }
+        .burger {
+            display: none;
+        }
+
+        /* ---------- HERO SECTION ---------- */
+        .hero {
+            width: 100vw;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding-top: var(--header-height);
+            background: linear-gradient(135deg, #f7f8fd 45%, #e6eaff 100%);
+            transition: background 0.3s;
+        }
+        .hero-inner {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 55px;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 90vw;
+        }
+        .hero-text {
+            flex-basis: 450px;
+            min-width: 285px;
+            padding: 38px 30px;
+            border-radius: var(--border-radius);
+            background: var(--glass-bg);
+            backdrop-filter: var(--glass-blur);
+            box-shadow: 0 4px 32px rgba(30,40,90,0.13);
+            border: 2px solid rgba(96,93,255,0.09);
+        }
+        .hero-text h4 {
+            color: var(--accent2);
+            font-family: var(--font-mono);
+            letter-spacing: 1px;
+            font-size: 1.05rem;
+            margin-bottom: 10px;
+        }
+        .hero-text h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #373e8f;
+        }
+        .hero-text .typewriter-container {
+            min-height: 30px;
+            color: var(--accent3);
+            font-family: var(--font-mono);
+            font-size: 1.22rem;
+            margin-bottom: 15px;
+        }
+        .hero-text p {
+            color: #465174;
+            line-height: 1.75;
+            font-size: 1.05rem;
+            margin-bottom: 30px;
+        }
+        .hero-btns {
+            display: flex;
+            gap: 20px;
+        }
+        .btn {
+            display: inline-block;
+            font-family: var(--font-mono);
+            padding: 14px 28px;
+            font-size: 1rem;
+            border-radius: 7px;
+            text-decoration: none;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 2px 8px 0 rgba(100, 100, 200, 0.10);
+            transition: background 0.2s, color 0.2s, box-shadow 0.2s, transform 0.13s;
+        }
+        .primary-btn {
+            background: linear-gradient(90deg, var(--accent), var(--accent2));
+            color: #fff;
+        }
+        .primary-btn:hover {
+            background: linear-gradient(270deg, var(--accent2), var(--accent));
+            color: #fff;
+            transform: translateY(-2px) scale(1.04);
+            box-shadow: 0 4px 16px rgba(90, 90, 255, 0.14);
+        }
+        .secondary-btn {
+            background: #fff;
+            color: var(--accent);
+            border: 2px solid var(--accent2);
+        }
+        .secondary-btn:hover {
+            background: var(--accent2);
+            color: #fff;
+            transform: translateY(-2px) scale(1.04);
+            box-shadow: 0 6px 22px rgba(31, 159, 224, 0.15);
+        }
+        /* HERO IMAGE CARD */
+        .hero-img-container {
+            flex-basis: 400px;
+            display: flex; align-items: center; justify-content: center;
+            min-width: 240px;
+        }
+        .profile-card {
+            position: relative;
+            width: 330px; max-width: 90vw; height: 420px;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(85, 53, 255, 0.09);
+            background: var(--glass-bg);
+            backdrop-filter: var(--glass-blur);
+            border: 2px solid rgba(66,131,255, 0.15);
+            display: flex; align-items: center; justify-content: center;
+            transition: transform 0.19s cubic-bezier(.43,1.33,.92,1.17);
+        }
+        .profile-card:hover {
+            transform: scale(1.04) rotateZ(-0.5deg) translateY(-7px);
+        }
+        .profile-card img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            border-radius: var(--border-radius);
+            filter: grayscale(12%) contrast(1.11) saturate(1.14) brightness(1.16) blur(0.3px);
+            transition: filter 0.25s;
+        }
+        .profile-card:hover img {
+            filter: contrast(1.05) brightness(0.99);
+        }
+        .profile-card::after {
+            content: "";
+            position: absolute;
+            left: 10%; bottom: 8%;
+            width: 80%; height: 50px;
+            border-radius: 30px 30px 100px 100px;
+            background: linear-gradient(90deg, var(--accent2) 0%, var(--accent) 100%);
+            opacity: 0.12;
+            filter: blur(5px);
+            z-index: 3;
+        }
+        /* ANIMATIONS */
+        @keyframes fade-in-up {
+            0% { opacity: 0; transform: translateY(30px);}
+            100% { opacity:1; transform: translateY(0);}
+        }
+        .hero-text, .profile-card { animation: fade-in-up 1.2s cubic-bezier(.5,1.64,.77,.81);}
+        /* TYPEWRITER CURSOR */
+        .typewriter-cursor {
+            display: inline-block;
+            background: var(--accent3);
+            width: 2.5px; height: 1.13em;
+            margin-left: 4px;
+            animation: blink 0.85s infinite step-end;
+            vertical-align: bottom;
+        }
+        @keyframes blink {
+            0%, 100%{ opacity:1;}
+            50%{ opacity: 0;}
+        }
+
+        /* ---------- RESPONSIVE ---------- */
+        @media (max-width:990px) {
+            .hero-inner {
+                flex-direction: column;
+                gap: 45px;
+            }
+        }
+        @media (max-width:670px) {
+            .navbar { padding: 0 18px;}
+            .logo h2 { font-size: 1.47rem;}
+            .header { height: 61px; }
+            .hero { padding-top: 61px;}
+            .hero-inner { width: 98vw; padding: 0;}
+            .hero-img-container, .hero-text{ padding: 0; background: none; border: none; box-shadow: none;}
+            .profile-card { width: 90vw; max-width: 310px; height: 340px;}
+            .hero-text h1 { font-size: 1.98rem;}
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="navbar">
+            <div class="logo">
+                <h2>My Portfolio</h2>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="skills.html">Skills</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    <section class="hero">
+        <div class="hero-inner">
+            <div class="hero-text">
+                <h4>Hello and Welcome</h4>
+                <h1>Allada Sai<br>Satya Sharan</h1>
+                <div class="typewriter-container">
+                    I am a <span id="typewriter"></span><span class="typewriter-cursor"></span>
+                </div>
+                <p>
+                    Passionate about crafting <strong>immersive digital experiences</strong> through robust engineering and clean code. I love transforming complex problems into intuitive, responsive, and elegant solutions with a focus on the very latest in <strong>Full-Stack & Frontend</strong> technologies.
+                </p>
+                <div class="hero-btns">
+                    <a href="about.html" class="btn primary-btn">View Portfolio</a>
+                    <a href="contact.html" class="btn secondary-btn">Contact Me</a>
+                </div>
+            </div>
+            <div class="hero-img-container">
+                <div class="profile-card">
+                    <img src="images/Myphoto.jpg" alt="Allada Sai Satya Sharan Profile Photo">
+                </div>
+            </div>
+        </div>
+    </section>
+    <script>
+        // BURGER (not shown; add if implementing hamburger for mobile nav)
+
+        // Typewriter Animation (rewritten for smoothness and efficiency)
+        const typewriter = document.getElementById('typewriter');
+        const roles = [
+            'Full Stack Developer',
+            'Django Framework developer',
+            'React Enthusiast',
+        ];
+        let phraseIdx = 0, charIdx = 0, del = false, typing;
+
+        function typeLoop() {
+            let word = roles[phraseIdx];
+            if (!del) {
+                typewriter.textContent = word.substring(0, charIdx + 1);
+                charIdx++;
+                if (charIdx === word.length) {
+                    del = true;
+                    typing = setTimeout(typeLoop, 1300);
+                    return;
+                }
+            } else {
+                typewriter.textContent = word.substring(0, charIdx - 1);
+                charIdx--;
+                if (charIdx === 0) {
+                    del = false;
+                    phraseIdx = (phraseIdx + 1) % roles.length;
+                    typing = setTimeout(typeLoop, 600);
+                    return;
+                }
+            }
+            typing = setTimeout(typeLoop, !del ? 80 : 32);
+        }
+        document.addEventListener('DOMContentLoaded', typeLoop);
+    </script>
+</body>
+</html>

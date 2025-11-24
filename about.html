@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Me | Professional Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* --- Variables & Reset --- */
+        :root {
+            --bg-dark: #050505;
+            --primary: #7000ff;
+            --secondary: #00d2ff;
+            --accent: #ff0055;
+            --text-main: #ffffff;
+            --text-muted: #9ca3af;
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.05);
+            --card-hover: rgba(255, 255, 255, 0.08);
+            --easing: cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box;}
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* --- Animated Background Blobs --- */
+        .background-fx {
+            position: fixed;
+            width: 100vw;
+            height: 100vh;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            overflow: hidden;
+            background: #050505;
+        }
+
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.4;
+            animation: drift 20s infinite alternate linear;
+        }
+
+        .orb-1 { width: 50vw; height: 50vw; background: var(--primary); top: -10%; left: -10%;}
+        .orb-2 { width: 40vw; height: 40vw; background: var(--secondary); bottom: -10%; right: -10%; animation-delay: -5s;}
+        .orb-3 { width: 30vw; height: 30vw; background: var(--accent); top: 40%; left: 40%; animation-duration: 15s;}
+
+        @keyframes drift {
+            0% {transform: translate(0, 0) rotate(0deg);}
+            100% {transform: translate(50px, 50px) rotate(20deg);}
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* --- Typography --- */
+        h1, h2, h3, h4 { font-family: 'Syne', sans-serif;}
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .section-title h2 {
+            font-size: 4rem;
+            font-weight: 800;
+            background: linear-gradient(to right, #fff, #aaa);
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -1px;
+            margin-bottom: 15px;
+        }
+
+        .section-title p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        /* --- Floating Navigation --- */
+        .header {
+            position: fixed;
+            top: 20px;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            transition: 0.3s;
+        }
+
+        .navbar {
+            background: rgba(10, 10, 10, 0.6);
+            backdrop-filter: blur(12px);
+            padding: 15px 40px;
+            border-radius: 50px;
+            border: 1px solid var(--glass-border);
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .logo h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+        }
+        .logo span { color: var(--secondary); }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: 0.3s;
+        }
+        .nav-links a:hover, .nav-links a.active {
+            color: white;
+            text-shadow: 0 0 10px rgba(255,255,255,0.5);
+        }
+
+        .burger { display: none; cursor: pointer; }
+        .burger div { width: 25px; height: 2px; background: white; margin: 6px; transition: 0.3s;}
+
+        /* --- Buttons --- */
+        .btn {
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.3s;
+            display: inline-block;
+            border: none;
+            cursor: pointer;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        .primary-btn {
+            background: white;
+            color: black;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        .primary-btn::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 0%; height: 100%;
+            background: var(--secondary);
+            transition: 0.4s var(--easing);
+            z-index: -1;
+        }
+        .primary-btn:hover::before { width: 100%;}
+        .primary-btn:hover { color: white; box-shadow: 0 0 20px rgba(0, 210, 255, 0.4); }
+
+        /* --- About Section --- */
+        section { padding: 120px 0; }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .profile-wrapper {
+            position: relative;
+            border-radius: 30px;
+            overflow: visible;
+        }
+
+        .profile-img-box {
+            width: 100%;
+            aspect-ratio: 1/1.1;
+            border-radius: 30px;
+            overflow: hidden;
+            position: relative;
+            z-index: 2;
+            transform: rotate(-3deg);
+            transition: 0.5s var(--easing);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .profile-img-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 0.5s;
+        }
+        .profile-wrapper:hover .profile-img-box {
+            transform: rotate(0deg) scale(1.02);
+        }
+        .profile-wrapper::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 30px;
+            border: 2px solid var(--primary);
+            transform: rotate(3deg);
+            z-index: 1;
+            transition: 0.5s;
+        }
+        .profile-wrapper:hover::after {transform: rotate(0deg) scale(0.95); }
+
+        .about-text h3 { font-size: 2.5rem; margin-bottom: 20px;}
+        .about-text .highlight {
+            background: linear-gradient(90deg, var(--secondary), var(--primary));
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .about-info {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin: 40px 0;
+        }
+        .info-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            padding: 20px;
+            border-radius: 15px;
+            transition: 0.3s;
+        }
+        .info-card:hover {
+            background: var(--card-hover);
+            border-color: var(--secondary);
+            transform: translateY(-5px);
+        }
+        .info-card h4 {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .info-card span {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: white;
+        }
+
+        /* --- Experience Timeline (Student Version) --- */
+        .timeline {
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px 0;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0; bottom: 0; left: 50%;
+            width: 2px;
+            background: linear-gradient(to bottom, transparent, var(--primary), var(--secondary), transparent);
+            transform: translateX(-50%);
+        }
+        .timeline-item {
+            position: relative;
+            width: 50%;
+            padding: 0 40px;
+            margin-bottom: 60px;
+        }
+        .timeline-item:nth-child(odd) { left: 0; text-align: right;}
+        .timeline-item:nth-child(even) { left: 50%; text-align: left;}
+        .timeline-dot {
+            position: absolute;
+            top: 20px;
+            width: 16px;
+            height: 16px;
+            background: var(--bg-dark);
+            border: 2px solid var(--secondary);
+            border-radius: 50%;
+            z-index: 2;
+            box-shadow: 0 0 15px var(--secondary);
+        }
+        .timeline-item:nth-child(odd) .timeline-dot { right: -8px;}
+        .timeline-item:nth-child(even) .timeline-dot { left: -8px;}
+        .timeline-content {
+            background: linear-gradient(145deg, rgba(255,255,255,0.05), rgba(255,255,255,0.01));
+            border: 1px solid var(--glass-border);
+            padding: 30px;
+            border-radius: 20px;
+            transition: 0.4s;
+            position: relative;
+        }
+        .timeline-content:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: 0 10px 40px -10px rgba(112, 0, 255, 0.3);
+        }
+        .timeline-content h3 { font-size: 1.4rem; color: white;}
+        .timeline-content .role { color: var(--secondary); font-weight: 600; margin: 5px 0; display: block;}
+        .timeline-content .date { font-size: 0.85rem; color: var(--text-muted); font-family: monospace; margin-bottom: 15px; display: block;}
+
+        /* --- Education Grid (3D Tilt) --- */
+        .education-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        .edu-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            padding: 40px 30px;
+            border-radius: 24px;
+            position: relative;
+            overflow: hidden;
+            transform-style: preserve-3d;
+            transform: perspective(1000px);
+        }
+        .edu-card i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+            background: rgba(112, 0, 255, 0.1);
+            padding: 15px;
+            border-radius: 12px;
+        }
+        .edu-card h3 { font-size: 1.4rem; margin-bottom: 10px;}
+        .edu-card p { color: var(--text-muted); margin-bottom: 5px;}
+        .edu-card .highlight { color: var(--secondary); font-weight: 600;}
+        /* --- Footer --- */
+        .footer {
+            padding: 50px 0;
+            border-top: 1px solid var(--glass-border);
+            text-align: center;
+            margin-top: 100px;
+            background: rgba(0,0,0,0.5);
+        }
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .social-links a {
+            width: 45px; height: 45px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.05);
+            display: flex; align-items: center; justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: 0.3s;
+            border: 1px solid transparent;
+        }
+        .social-links a:hover {
+            background: var(--primary);
+            transform: scale(1.1);
+            box-shadow: 0 0 20px var(--primary);
+        }
+        /* --- Scroll Reveal Animations --- */
+        .reveal-up {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: 1s var(--easing);
+        }
+        .reveal-up.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* --- Responsive --- */
+        @media (max-width: 992px) {
+            .about-content { grid-template-columns: 1fr; text-align: center;}
+            .profile-img-box { width: 300px; margin: 0 auto;}
+            .profile-wrapper::after { width: 300px; left: 50%; transform: translateX(-50%) rotate(3deg);}
+            .about-info { text-align: left;}
+        }
+        @media (max-width: 768px) {
+            .header { top: 0;}
+            .navbar {
+                width: 100%;
+                border-radius: 0;
+                justify-content: space-between;
+                padding: 20px;
+                border: none;
+                border-bottom: 1px solid var(--glass-border);
+            }
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                right: -100%;
+                height: 100vh;
+                width: 70%;
+                background: #0a0a0a;
+                flex-direction: column;
+                padding: 50px;
+                transition: 0.4s;
+                border-left: 1px solid var(--glass-border);
+            }
+            .nav-links.active { right: 0;}
+            .burger { display: block;}
+            .timeline::before { left: 20px;}
+            .timeline-item { width: 100%; padding-left: 50px; padding-right: 0; text-align: left;}
+            .timeline-item:nth-child(even) { left: 0;}
+            .timeline-item:nth-child(odd) .timeline-dot,
+            .timeline-item:nth-child(even) .timeline-dot { left: 11px; right: auto;}
+            .section-title h2 { font-size: 2.5rem;}
+        }
+    </style>
+</head>
+<body>
+    <div class="background-fx">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+    <header class="header">
+        <nav class="navbar">
+            
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html" class="active">About</a></li>
+                <li><a href="skills.html">Skills</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="burger">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+        </nav>
+    </header>
+    <section id="about">
+        <div class="container">
+            <div class="section-title reveal-up">
+                <h2>About Me</h2>
+                <p>Designing the future, one pixel at a time.</p>
+            </div>
+            <div class="about-content">
+                <div class="profile-wrapper reveal-up">
+                    <div class="profile-img-box">
+                        <img src="images/Myphoto.jpg" alt="Profile">
+                    </div>
+                </div>
+                <div class="about-text reveal-up">
+                    <h3>I'm <span class="highlight">Allada Sai Satya Sharan</span></h3>
+                    <p>A passionate frontend developer and third-year B.Tech IT student crafting interactive and immersive web experiences. I bridge the gap between engineering and design, turning complex logic into elegant, user-friendly interfaces. My journey started in college, and I've been obsessed with the "art of code" ever since.</p>
+                    <div class="about-info">
+                        <div class="info-card">
+                            <h4>Email</h4>
+                            <span>sharan.allada07@gmail.com</span>
+                        </div>
+                        <div class="info-card">
+                            <h4>Location</h4>
+                            <span>Vizianagaram, India</span>
+                        </div>
+                        <div class="info-card">
+                            <h4>B.Tech Year</h4>
+                            <span>3rd Year (2022 - 2025)</span>
+                        </div>
+                        <div class="info-card">
+                            <h4>Status</h4>
+                            <span>Open to Internships</span>
+                        </div>
+                    </div>
+                    <a href="F:\Portifolio\Resume\Sharan Resume.pdf" class="btn primary-btn">Download CV <i class="fas fa-arrow-down"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="experience">
+        <div class="container">
+            <div class="section-title reveal-up">
+                <h2>Journey</h2>
+                <p>My academic milestones and growth as a student</p>
+            </div>
+            <div class="timeline">
+                <div class="timeline-item reveal-up">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3>B.Tech IT Student</h3>
+                        <span class="role">JNTU-GV College of Engineering</span>
+                        <span class="date">2022 - Present</span>
+                        <p>Currently pursuing B.Tech in IT with a focus on web technologies, building projects and participating in coding competitions.</p>
+                    </div>
+                </div>
+                <div class="timeline-item reveal-up">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3>Project Development</h3>
+                        <span class="role">Personal & Academic Projects</span>
+                        <span class="date">2023 - Present</span>
+                        <p>Developed full-stack apps such as event management system, ticket platform, auction hub, and collaborative classroom platform using modern tech stacks.</p>
+                    </div>
+                </div>
+                <div class="timeline-item reveal-up">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3>Learning & Growth</h3>
+                        <span class="role">Competitive Coding & Courses</span>
+                        <span class="date">2022 - Present</span>
+                        <p>Continuously learning new frameworks and participating in coding contests to enhance problem-solving skills and technical knowledge.</p>
+                    </div>
+                </div>
+                <div class="timeline-item reveal-up">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3>Open Source Contributions</h3>
+                        <span class="role">Community & GitHub</span>
+                        <span class="date">2024 - Present</span>
+                        <p>Exploring and contributing to open-source projects to gain real-world experience and collaborate within the developer community.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="education">
+        <div class="container">
+            <div class="section-title reveal-up">
+                <h2>Education</h2>
+            </div>
+            <div class="education-grid">
+                <div class="edu-card tilt-card reveal-up">
+                    <i class="fas fa-graduation-cap"></i>
+                    <h3>B.Tech in IT</h3>
+                    <p class="highlight">JNTU-GV College of Engineering</p>
+                    <p>2022 - 2026</p>
+                    <p>Specialized in Web Technologies and Data Structures.</p>
+                </div>
+                <div class="edu-card tilt-card reveal-up">
+                    <i class="fas fa-school"></i>
+                    <h3>Intermediate (MPC)</h3>
+                    <p class="highlight">Tirumala Junior College</p>
+                    <p>2020 - 2022</p>
+                    <p>Focus on Mathematics, Physics, and Chemistry.</p>
+                </div>
+                <div class="edu-card tilt-card reveal-up">
+                    <i class="fas fa-book-open"></i>
+                    <h3>SSC</h3>
+                    <p class="highlight">Sri Chaitanya Techno School</p>
+                    <p>2018 - 2020</p>
+                    <p>Secondary School Certification.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-logo">
+                <h2 style="font-family: 'Syne'; font-size: 2rem;">Port<span>folio.</span></h2>
+            </div>
+            <div class="social-links">
+                <a href="https://github.com/Sh-aran13"><i class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/sai-satya-sharan-allada-3412752b7"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://twitter.com/Sharan1328"><i class="fab fa-twitter"></i></a>
+                <a href="https://www.instagram.com/sharanallada4"><i class="fab fa-instagram"></i></a>
+            </div>
+            <p style="margin-top: 20px; color: #666; font-size: 0.9rem;">&copy; 2025 Allada Sai Satya Sharan.</p>
+        </div>
+    </footer>
+    <script>
+        // --- Mobile Nav ---
+        const burger = document.querySelector('.burger');
+        const nav = document.querySelector('.nav-links');
+        burger.addEventListener('click', () => {
+            nav.classList.toggle('active');
+            burger.classList.toggle('toggle');
+        });
+
+        // --- Scroll Animation Observer ---
+        const revealElements = document.querySelectorAll('.reveal-up');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // --- 3D Tilt Effect for Cards ---
+        const cards = document.querySelectorAll('.tilt-card');
+        cards.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                const rotateX = ((y - centerY) / centerY) * -10; // Max rotation deg
+                const rotateY = ((x - centerX) / centerX) * 10;
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = `perspective(1000px) rotateX(0) rotateY(0) scale(1)`;
+            });
+        });
+    </script>
+</body>
+</html>
