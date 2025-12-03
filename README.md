@@ -2,7 +2,7 @@
 
 A complete, responsive portfolio website for freshers with modern design, animations, and all essential features. This portfolio includes separate pages for each section with consistent styling and navigation.
 
-Portfolio is live at:: https://sharan-portfolio-28pw.vercel.app/
+Portfolio is live at:: https://sharan-portfolio07.vercel.app/
 
 ## Features
 
