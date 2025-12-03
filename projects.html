@@ -497,12 +497,37 @@
             .projects-content { grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
             .section-title h2 { font-size: 3rem; }
         }
-
         @media screen and (max-width: 768px) {
             .nav-links { display: none; }
             .burger { display: block; color: var(--accent-color); font-size: 1.8rem; cursor: pointer; }
             .section-title h2 { font-size: 2.5rem; }
             .project-card { margin: 0 auto; max-width: 400px; }
+            .project-categories { flex-wrap: wrap; justify-content: center; }
+            .category-btn { padding: 12px 20px; font-size: 0.9rem; }
+            .project-detail-content { padding: 30px; }
+            .project-detail-content h2 { font-size: 2rem; }
+            .project-tags { gap: 8px; }
+            .project-tags span { padding: 4px 12px; font-size: 0.75rem; }
+        }
+        @media screen and (max-width: 480px) {
+            .section-title h2 { font-size: 2rem; }
+            .project-card { max-width: 100%; }
+            .project-info { padding: 20px 15px; }
+            .project-info h3 { font-size: 1.5rem; }
+            .project-info p { font-size: 0.9rem; }
+            .project-links { flex-direction: column; gap: 10px; }
+            .btn { width: 100%; text-align: center; }
+            .project-detail-content { padding: 20px; }
+            .project-detail-content h2 { font-size: 1.8rem; }
+            .project-features li { font-size: 0.95rem; }
+            .social-link { width: 45px; height: 45px; font-size: 1.1rem; }
+        }
+        @media screen and (max-width: 360px) {
+            .section-title h2 { font-size: 1.8rem; }
+            .project-info h3 { font-size: 1.3rem; }
+            .project-detail-content h2 { font-size: 1.6rem; }
+            .project-detail-content p { font-size: 0.9rem; }
+            .social-link { width: 40px; height: 40px; }
         }
     </style>
 </head>
@@ -664,9 +689,7 @@
         <div class="container">
             <div class="footer-logo">
                 <h2>My <span>Portfolio</span></h2>
-            </div>
-            <p class="footer-desc">Building digital experiences that merge creativity with code. Let's connect and create something extraordinary.</p>
-            
+            </div><br><br>
             <div class="footer-social">
                 <a href="https://github.com/Sh-aran13" class="social-link"><i class="fab fa-github"></i></a>
                 <a href="www.linkedin.com/in/sai-satya-sharan-allada-3412752b7" class="social-link"><i class="fab fa-linkedin-in"></i></a>
