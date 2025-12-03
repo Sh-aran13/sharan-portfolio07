@@ -493,6 +493,26 @@
             .burger.active .line3 { transform: rotate(45deg) translate(-5px, -6px); }
             
             .section-title h2 { font-size: 2.5rem; }
+            .skills-content { grid-template-columns: 1fr; }
+            .tools-content { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
+            .certifications-content { grid-template-columns: 1fr; }
+            .certification-box { max-width: 100%; }
+        }
+        @media screen and (max-width: 480px) {
+            .section-title h2 { font-size: 2rem; }
+            .skill-box { padding: 20px; }
+            .skill-name { font-size: 1rem; }
+            .tool-box { width: 140px; height: 140px; padding: 20px 10px; }
+            .tool-box i { font-size: 2.5rem; }
+            .tool-box h3 { font-size: 1rem; }
+            .certification-info { padding: 20px; }
+            .certification-info h3 { font-size: 1.2rem; }
+        }
+        @media screen and (max-width: 360px) {
+            .section-title h2 { font-size: 1.8rem; }
+            .tool-box { width: 120px; height: 120px; }
+            .tool-box i { font-size: 2rem; }
+            .certification-img { height: 150px; }
         }
 
         /* --- SCROLL ANIMATION CLASSES --- */
